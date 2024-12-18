@@ -6,7 +6,7 @@ vim.g.maplocalleader = ' '
 
 -- reload/source current file
 bind('n', '<leader><leader>x', function()
-  vim.cmd [[luafile $MYVIMRC]]
+  vim.cmd [[luafile ~/.config/nvim/init.lua]]
   print("Reloaded vivi.")
 end, { desc = 'Source configuration' })
 

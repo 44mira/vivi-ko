@@ -28,6 +28,9 @@ return {
     require('mini.surround').setup()
 
     -- statusline
-    require('mini.statusline').setup()
+    -- require('mini.statusline').setup()
+
+    -- start page
+    require('mini.starter').setup()
   end
 }
