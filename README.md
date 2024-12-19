@@ -1,6 +1,9 @@
 # vivi
 Simplified Neovim configuration with a focus on accessibility and ease of use.
 
+> [!NOTE]
+> This is my personal vivi configuration. Check out the [base distribution](https://github.com/44mira/vivi)!
+
 ## Preview
 
 | splash page                                                                              | telescope                                                                                 |
