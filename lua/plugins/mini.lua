@@ -46,7 +46,12 @@ return {
 
           for _, v in ipairs(config_dirs) do
             local name, directory = unpack(v)
-            local item = { name = "Configure " .. name, action = "e " .. directory, section = 'Builtin actions' }
+            local item = {
+              name = "Configure " .. name,
+              action = "cd " .. directory .. " | e .",
+              section =
+              'Builtin actions'
+            }
 
             table.insert(builtin_actions, item)
           end
