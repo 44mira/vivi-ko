@@ -30,6 +30,7 @@ return {
 
     bind('<leader>sf', fzf.files, 'Search files')
     bind('<leader>sg', fzf.live_grep, 'Grep files')
-    -- bind('<leader>sb', fzf.buffers, 'Search buffers')
+    bind('<leader>sb', fzf.buffers, 'Search buffers')
+    bind('<leader>sd', fzf.diagnostics_document, 'Search Document diagnostics')
   end
 }
