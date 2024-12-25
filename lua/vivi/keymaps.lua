@@ -13,8 +13,8 @@ end, { desc = 'Source configuration' })
 -- ergonomic normal mode
 bind('i', 'jk', '<Esc>', { desc = 'Normal mode' })
 
--- sanity binds
-bind('n', '<Esc>', '<cmd>nohl<cr>', { desc = 'Clear highlight' })
+-- bind('n', '<Esc>', '<cmd>nohl<cr>', { desc = 'Clear highlight' })
+vim.o.hlsearch = true
 
 ---@deprecated Use oil.nvim
 -- bind('n', '<leader>f', '<cmd>Ex<cr>', { desc = 'Open file explorer' })
