@@ -34,6 +34,7 @@ bind('n', '<leader>bd', '<cmd>bd<cr>', { desc = 'Buffer delete' })
 
 -- assign a colorcolumn to column <count>. defaults to 80
 bind('n', '<leader>cc', function()
+  vim.cmd [[IBLToggle]]
   if vim.o.colorcolumn ~= "" then
     vim.o.colorcolumn = ""
     return

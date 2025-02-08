@@ -8,7 +8,9 @@ return {
   },
 
   opts = {
-    initial_state = false,
+    markdown = {
+      enable = false
+    }
   },
 
   init = function()
