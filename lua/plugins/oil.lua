@@ -7,17 +7,16 @@ Notable keymappings (with <leader> as <space>):
 <leader>f : Open an Oil buffer on the current file
 --]]
 
-
 return {
-  'stevearc/oil.nvim',
-  dependencies = { { "echasnovski/mini.icons", opts = {} } },
-  lazy = false,
-  keys = {
-    { "<leader>f", "<cmd>Oil<cr>", { desc = "Open Oil buffer" } }
-  },
-  config = function()
-    require('oil').setup {
-      default_file_explorer = true
-    }
-  end
+	"stevearc/oil.nvim",
+	dependencies = { { "echasnovski/mini.icons", opts = {} } },
+	lazy = false,
+	keys = {
+		{ "<leader>f", "<cmd>Oil<cr>", { desc = "Open Oil buffer" } },
+	},
+	config = function()
+		require("oil").setup({
+			default_file_explorer = true,
+		})
+	end,
 }

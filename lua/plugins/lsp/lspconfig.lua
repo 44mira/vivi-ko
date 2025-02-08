@@ -31,70 +31,72 @@ Relevant keymaps (with <leader> as <space>):
 --]]
 
 local function bind(lhs, rhs, desc)
-  vim.keymap.set('n', lhs, rhs, { desc = desc })
+	vim.keymap.set("n", lhs, rhs, { desc = desc })
 end
 
 return {
-  'neovim/nvim-lspconfig',
-  dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",
-    "nvim-telescope/telescope.nvim",
-    {
-      "folke/lazydev.nvim",
-      ft = "lua", -- only load on lua files
-      opts = {
-        library = {
-          -- See the configuration section for more details
-          -- Load luvit types when the `vim.uv` word is found
-          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        },
-      },
-    },
-  },
-  config = function()
-    local builtin = require("telescope.builtin")
+	"neovim/nvim-lspconfig",
+	dependencies = {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"hrsh7th/cmp-nvim-lsp",
+		"nvim-telescope/telescope.nvim",
+		{
+			"folke/lazydev.nvim",
+			ft = "lua", -- only load on lua files
+			opts = {
+				library = {
+					-- See the configuration section for more details
+					-- Load luvit types when the `vim.uv` word is found
+					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				},
+			},
+		},
+	},
+	config = function()
+		local builtin = require("telescope.builtin")
 
-    require('mason').setup {}
-    require('mason-lspconfig').setup {
-      ensure_installed = { 'lua_ls', 'pyright' },
-      automatic_installation = false,
-    }
+		require("mason").setup({})
+		require("mason-lspconfig").setup({
+			ensure_installed = { "lua_ls", "pyright" },
+			automatic_installation = false,
+		})
 
-    vim.keymap.set('i', '<C-j>', vim.lsp.buf.signature_help, { desc = "Signature help" })
-    bind('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
-    bind('gr', builtin.lsp_references, '[G]oto [R]eferences')
-    bind('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
-    bind('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
-    bind('<leader>ws', builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-    bind('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-    bind('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-    bind('gd', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+		vim.keymap.set("i", "<C-j>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+		bind("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
+		bind("gr", builtin.lsp_references, "[G]oto [R]eferences")
+		bind("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
+		bind("<leader>ds", builtin.lsp_document_symbols, "[D]ocument [S]ymbols")
+		bind("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+		bind("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+		bind("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+		bind("gd", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-    require("mason-lspconfig").setup_handlers {
-      function(server_name)
-        require("lspconfig")[server_name].setup(capabilities)
-      end,
-    }
+		require("mason-lspconfig").setup_handlers({
+			function(server_name)
+				require("lspconfig")[server_name].setup(capabilities)
+			end,
+		})
 
-    vim.api.nvim_create_autocmd('LspAttach', {
-      callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if not client then return end
+		vim.api.nvim_create_autocmd("LspAttach", {
+			callback = function(args)
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
+				if not client then
+					return
+				end
 
-        if client.supports_method('textDocument/formatting') then
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = args.buf,
-            callback = function()
-              vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-            end
-          })
-        end
-      end
-    })
-  end
+				if client.supports_method("textDocument/formatting") then
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = args.buf,
+						callback = function()
+							vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+						end,
+					})
+				end
+			end,
+		})
+	end,
 }

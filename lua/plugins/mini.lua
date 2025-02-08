@@ -15,56 +15,55 @@ sr<character>              : replace surrounding <character>
 --]]
 
 local config_dirs = {
-  { "Neovim",   '~/.config/nvim' },
-  { 'kitty',    '~/.config/kitty' },
-  { 'Hyprland', '~/.config/hypr' },
+	{ "Neovim", "~/.config/nvim" },
+	{ "kitty", "~/.config/kitty" },
+	{ "Hyprland", "~/.config/hypr" },
 }
 
 return {
-  'echasnovski/mini.nvim',
-  version = '*',
-  init = function()
-    -- around-inside text objects
-    require('mini.ai').setup()
+	"echasnovski/mini.nvim",
+	version = "*",
+	init = function()
+		-- around-inside text objects
+		require("mini.ai").setup()
 
-    -- auto pairing
-    require('mini.pairs').setup()
+		-- auto pairing
+		require("mini.pairs").setup()
 
-    -- surround actions
-    require('mini.surround').setup()
+		-- surround actions
+		require("mini.surround").setup()
 
-    -- statusline
-    -- require('mini.statusline').setup()
+		-- statusline
+		-- require('mini.statusline').setup()
 
-    -- start page
-    local starter = require('mini.starter')
-    starter.setup({
-      items = {
-        starter.sections.recent_files(),
-        function()
-          local builtin_actions = {}
+		-- start page
+		local starter = require("mini.starter")
+		starter.setup({
+			items = {
+				starter.sections.recent_files(),
+				function()
+					local builtin_actions = {}
 
-          for _, v in ipairs(config_dirs) do
-            local name, directory = unpack(v)
-            local item = {
-              name = "Configure " .. name,
-              action = "cd " .. directory .. " | e .",
-              section =
-              'Builtin actions'
-            }
+					for _, v in ipairs(config_dirs) do
+						local name, directory = unpack(v)
+						local item = {
+							name = "Configure " .. name,
+							action = "cd " .. directory .. " | e .",
+							section = "Builtin actions",
+						}
 
-            table.insert(builtin_actions, item)
-          end
+						table.insert(builtin_actions, item)
+					end
 
-          return builtin_actions
-        end,
-        starter.sections.builtin_actions(),
-      },
-      content_hooks = {
-        starter.gen_hook.adding_bullet(),
-        starter.gen_hook.aligning("center", "center"),
-        starter.gen_hook.indexing('all', { 'Recent files' })
-      }
-    })
-  end
+					return builtin_actions
+				end,
+				starter.sections.builtin_actions(),
+			},
+			content_hooks = {
+				starter.gen_hook.adding_bullet(),
+				starter.gen_hook.aligning("center", "center"),
+				starter.gen_hook.indexing("all", { "Recent files" }),
+			},
+		})
+	end,
 }
