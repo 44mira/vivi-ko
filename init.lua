@@ -33,6 +33,9 @@ vim.opt.splitbelow = true
 -- Use global statusline
 vim.o.laststatus = 3
 
+-- Use linebreak on words
+vim.o.linebreak = true
+
 -- Use marker folds
 vim.o.foldmethod = 'marker'
 

@@ -35,7 +35,7 @@ return {
         request = 'launch',
         cwd = '${workspaceFolder}',
         program = {
-          lua = 'lua5.1',
+          lua = 'lua5.4',
           file = '${file}',
         },
         args = {},

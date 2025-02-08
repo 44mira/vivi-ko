@@ -39,8 +39,8 @@ return {
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "saghen/blink.cmp",
-    'ibhagwan/fzf-lua',
+    "hrsh7th/cmp-nvim-lsp",
+    "nvim-telescope/telescope.nvim",
     {
       "folke/lazydev.nvim",
       ft = "lua", -- only load on lua files
@@ -54,7 +54,7 @@ return {
     },
   },
   config = function()
-    local fzf = require('fzf-lua')
+    local builtin = require("telescope.builtin")
 
     require('mason').setup {}
     require('mason-lspconfig').setup {
@@ -63,19 +63,20 @@ return {
     }
 
     vim.keymap.set('i', '<C-j>', vim.lsp.buf.signature_help, { desc = "Signature help" })
-    bind('gd', fzf.lsp_definitions, '[G]oto [D]efinition')
-    bind('gr', fzf.lsp_references, '[G]oto [R]eferences')
-    bind('gI', fzf.lsp_implementations, '[G]oto [I]mplementation')
-    bind('<leader>ds', fzf.lsp_document_symbols, '[D]ocument [S]ymbols')
-    bind('<leader>ws', fzf.lsp_live_workspace_symbols, '[W]orkspace [S]ymbols')
+    bind('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
+    bind('gr', builtin.lsp_references, '[G]oto [R]eferences')
+    bind('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
+    bind('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
+    bind('<leader>ws', builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
     bind('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
     bind('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-    bind('K', vim.lsp.buf.hover, 'Hover Documentation')
-    bind('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+    bind('gd', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     require("mason-lspconfig").setup_handlers {
       function(server_name)
-        local capabilities = require('blink.cmp').get_lsp_capabilities({})
         require("lspconfig")[server_name].setup(capabilities)
       end,
     }

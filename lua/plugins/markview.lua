@@ -9,5 +9,11 @@ return {
 
   opts = {
     initial_state = false,
-  }
+  },
+
+  init = function()
+    local markview = require("markview")
+
+    vim.keymap.set("n", "<leader>mv", "<cmd>Markview toggle<cr>", { desc = "Toggle Markview" })
+  end
 }
