@@ -1,15 +1,15 @@
 return {
-  s(
-    'main',
-    fmt(
-      [[
+	s(
+		"main",
+		fmt(
+			[[
 def main():
   {} 
 
 
 if __name__ == '__main__':
   main()]],
-      { i(1) }
-    )
-  ),
+			{ i(1) }
+		)
+	),
 }

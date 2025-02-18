@@ -39,6 +39,10 @@ vim.o.linebreak = true
 -- Use marker folds
 vim.o.foldmethod = "marker"
 
+vim.o.rtp = vim.o.rtp
+	.. vim.fn.expand(",$HOME/.opam/default/share/ocp-index/vim")
+	.. vim.fn.expand(",$HOME/.opam/default/share/ocp-indent/vim")
+
 FoldText = function()
 	local foldStart = vim.fn.getline(vim.v.foldstart)
 	-- formatting block {{{1
@@ -79,6 +83,17 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 		vim.cmd("loadview")
 	end,
 })
+
+-- spell check for txt files
+vim.api.nvim_create_augroup("vivi-spellcheck", { clear = true })
+vim.o.spelllang = "en_us"
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = "vivi-spellcheck",
+	callback = function()
+		vim.o.spell = vim.list_contains({ "txt" }, vim.bo.filetype)
+	end,
+})
+
 -- }}}
 
 require("vivi.keymaps")
