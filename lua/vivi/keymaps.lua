@@ -29,24 +29,3 @@ end
 -- buffer navigation
 bind("n", "<leader>[", "<cmd>bp<cr>", { desc = "Previous buffer" })
 bind("n", "<leader>]", "<cmd>bn<cr>", { desc = "Next buffer" })
-bind("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Buffer delete" })
-
--- assign a colorcolumn to column <count>. defaults to 80
-bind("n", "<leader>cc", function()
-	if Snacks.indent.enabled then
-		Snacks.indent.enable()
-	else
-		Snacks.indent.disable()
-	end
-
-	if vim.o.colorcolumn ~= "" then
-		vim.o.colorcolumn = ""
-		return
-	end
-
-	if vim.v.count ~= 0 then
-		vim.o.colorcolumn = vim.v.count .. ""
-	else
-		vim.o.colorcolumn = "80"
-	end
-end, { desc = "Toggle colorcolumn" })

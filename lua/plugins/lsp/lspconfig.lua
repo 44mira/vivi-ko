@@ -41,17 +41,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"hrsh7th/cmp-nvim-lsp",
 		"nvim-telescope/telescope.nvim",
-		{
-			"folke/lazydev.nvim",
-			ft = "lua", -- only load on lua files
-			opts = {
-				library = {
-					-- See the configuration section for more details
-					-- Load luvit types when the `vim.uv` word is found
-					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-				},
-			},
-		},
+		"folke/lazydev.nvim",
 	},
 	config = function()
 		local builtin = require("telescope.builtin")
@@ -79,11 +69,6 @@ return {
 			function(server_name)
 				require("lspconfig")[server_name].setup(capabilities)
 			end,
-		})
-
-		require("lspconfig").bqnlsp.setup({
-			libcbqnPath = "~/.bqn/CBQN",
-			cmd = { os.getenv("HOME") .. "/.bqn/bqnlsp/target/release/bqnlsp" },
 		})
 	end,
 }

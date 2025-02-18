@@ -37,33 +37,33 @@ return {
 		-- require('mini.statusline').setup()
 
 		-- start page
-		local starter = require("mini.starter")
-		starter.setup({
-			items = {
-				starter.sections.recent_files(),
-				function()
-					local builtin_actions = {}
-
-					for _, v in ipairs(config_dirs) do
-						local name, directory = unpack(v)
-						local item = {
-							name = "Configure " .. name,
-							action = "cd " .. directory .. " | e .",
-							section = "Builtin actions",
-						}
-
-						table.insert(builtin_actions, item)
-					end
-
-					return builtin_actions
-				end,
-				starter.sections.builtin_actions(),
-			},
-			content_hooks = {
-				starter.gen_hook.adding_bullet(),
-				starter.gen_hook.aligning("center", "center"),
-				starter.gen_hook.indexing("all", { "Recent files" }),
-			},
-		})
+		-- local starter = require("mini.starter")
+		-- starter.setup({
+		-- 	items = {
+		-- 		starter.sections.recent_files(),
+		-- 		function()
+		-- 			local builtin_actions = {}
+		--
+		-- 			for _, v in ipairs(config_dirs) do
+		-- 				local name, directory = unpack(v)
+		-- 				local item = {
+		-- 					name = "Configure " .. name,
+		-- 					action = "cd " .. directory .. " | e .",
+		-- 					section = "Builtin actions",
+		-- 				}
+		--
+		-- 				table.insert(builtin_actions, item)
+		-- 			end
+		--
+		-- 			return builtin_actions
+		-- 		end,
+		-- 		starter.sections.builtin_actions(),
+		-- 	},
+		-- 	content_hooks = {
+		-- 		starter.gen_hook.adding_bullet(),
+		-- 		starter.gen_hook.aligning("center", "center"),
+		-- 		starter.gen_hook.indexing("all", { "Recent files" }),
+		-- 	},
+		-- })
 	end,
 }
