@@ -77,7 +77,7 @@ local dashboard_config = {
 					section = "terminal",
 					enabled = in_git,
 					padding = 1,
-					ttl = 5 * 60,
+					ttl = 60,
 					indent = 3,
 				}, cmd)
 			end, cmds)
