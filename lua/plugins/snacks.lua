@@ -1,8 +1,9 @@
+-- Dashboard config {{{
 local dashboard_config = {
 	enabled = true,
 
+	width = 70,
 	preset = {
-
 		keys = {
 			{
 				icon = " ",
@@ -36,15 +37,15 @@ local dashboard_config = {
 			padding = 1,
 		},
 		{ icon = "■", title = "Recent Files", section = "recent_files", pane = 1, indent = 2, padding = 1 },
-		{ section = "keys", padding = 1 },
-		-- Git info {{{
+		{ section = "keys", padding = 3 },
+		-- Git info {{{2
 		function()
 			local in_git = Snacks.git.get_root() ~= nil
 
 			local cmds = {
 				{
 					title = "Open Issues",
-					cmd = "gh issue list -L 3",
+					cmd = [[gh issue list --json number,title,updatedAt --template '{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") .title .headRefName (timeago .updatedAt)}}{{else}} No Issues found. {{end}}']],
 					key = "i",
 					action = function()
 						vim.fn.jobstart("gh issue list --web", { detach = true })
@@ -55,7 +56,7 @@ local dashboard_config = {
 				{
 					icon = " ",
 					title = "Open PRs",
-					cmd = "gh pr list -L 3",
+					cmd = [[gh pr list --json number,title,headRefName,updatedAt --template '{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") .title .headRefName (timeago .updatedAt)}}{{else}} No PRs found. {{end}}']],
 					key = "P",
 					action = function()
 						vim.fn.jobstart("gh pr list --web", { detach = true })
@@ -80,7 +81,7 @@ local dashboard_config = {
 					indent = 3,
 				}, cmd)
 			end, cmds)
-		end, -- }}}
+		end, -- }}}2
 		{
 			pane = 2,
 			icon = " ",
@@ -91,8 +92,16 @@ local dashboard_config = {
 				Snacks.gitbrowse()
 			end,
 		},
+
+		{
+			text = {
+				{ "YOU ARE AT: ", hl = "SnacksDashboardIcon" },
+				{ vim.fn.getcwd() },
+			},
+		},
 	},
 }
+-- }}}
 
 return {
 	"folke/snacks.nvim",
@@ -106,6 +115,7 @@ return {
 		scope = { enabled = true },
 		bufdelete = { enabled = true },
 		dashboard = dashboard_config,
+		zen = { enabled = true },
 	},
 	init = function()
 		vim.api.nvim_create_user_command("Dash", function()
@@ -114,6 +124,13 @@ return {
 	end,
 	-- Keymaps {{{
 	keys = {
+		{
+			"<leader>zen",
+			function()
+				Snacks.zen()
+			end,
+			desc = "Zen mode",
+		},
 		{
 			"<leader>bd",
 			function()
