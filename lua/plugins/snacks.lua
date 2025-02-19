@@ -3,6 +3,8 @@ local dashboard_config = {
 	enabled = true,
 
 	width = 70,
+
+	-- Preset keys {{{2
 	preset = {
 		keys = {
 			{
@@ -25,7 +27,7 @@ local dashboard_config = {
 			},
 			{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
 		},
-	},
+	}, -- }}}2
 
 	sections = {
 		{ section = "header" },
