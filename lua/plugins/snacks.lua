@@ -43,6 +43,14 @@ local dashboard_config = {
 		-- Git info {{{2
 		function()
 			local in_git = Snacks.git.get_root() ~= nil
+			local git_stat = vim.system({ "git", "--no-pager", "diff", "--stat", "-B", "-M", "-C" }, { text = true })
+				:wait().stdout
+
+			if git_stat ~= "" then
+				git_stat = "git --no-pager diff --stat -B -M -C"
+			else
+				git_stat = "echo 'Up to date.'"
+			end
 
 			local cmds = {
 				{
@@ -68,7 +76,7 @@ local dashboard_config = {
 				{
 					icon = " ",
 					title = "Git Status",
-					cmd = "git --no-pager diff --stat -B -M -C",
+					cmd = git_stat,
 					height = 4,
 				},
 			}
