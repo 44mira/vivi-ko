@@ -15,13 +15,13 @@ local dashboard_config = {
 			},
 			{
 				icon = "󰄛",
-				key = "k",
+				key = "t",
 				desc = "Configure Kitty",
 				action = ":cd ~/.config/kitty | e .",
 			},
 			{
 				icon = "󰨇",
-				key = "h",
+				key = "w",
 				desc = "Configure Hyprland",
 				action = ":cd ~/.config/hypr | e .",
 			},
