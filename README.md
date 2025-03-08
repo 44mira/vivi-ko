@@ -6,12 +6,12 @@ Simplified Neovim configuration with a focus on accessibility and ease of use.
 
 ## Preview
 
-| splash page                                                                              | telescope                                                                                 |
-| ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| splash page | telescope                                                                                 |
+| -- | -- |
 |![image](https://github.com/user-attachments/assets/b5b4dc67-0cd7-4bba-bc92-79c8e3ec3e00) | ![image](https://github.com/user-attachments/assets/7294dd4e-add1-4c4a-86ba-ffc57f52c59e) |
 
-| oil buffer                                                                                | theme plugin                                                                              |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------  |
+| oil buffer | theme plugin |
+| -- | -- |
 | ![image](https://github.com/user-attachments/assets/8b1a65ab-07e6-4475-ac71-c93f5145ad4b) | ![image](https://github.com/user-attachments/assets/ee665a05-512e-4234-b590-008ed83175ce) |
 
 

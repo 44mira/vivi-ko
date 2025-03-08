@@ -43,10 +43,12 @@ local dashboard_config = {
 		-- Git info {{{2
 		function()
 			local in_git = Snacks.git.get_root() ~= nil
+			local has_remote = vim.system({ "git", "remote" }, { text = true }):wait().stdout ~= ""
 
 			local cmds = {
 				{
 					title = "Open Issues",
+					enabled = has_remote,
 					cmd = [[gh issue list --json number,title,updatedAt --template '{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") .title .headRefName (timeago .updatedAt)}}{{else}} No Issues found. {{end}}']],
 					key = "i",
 					action = function()
@@ -57,6 +59,7 @@ local dashboard_config = {
 				},
 				{
 					icon = " ",
+					enabled = has_remote,
 					title = "Open PRs",
 					cmd = [[gh pr list --json number,title,headRefName,updatedAt --template '{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") .title .headRefName (timeago .updatedAt)}}{{else}} No PRs found. {{end}}']],
 					key = "P",
@@ -68,8 +71,8 @@ local dashboard_config = {
 				{
 					icon = " ",
 					title = "Git Log",
-					cmd = [[git --no-pager log -6 --pretty=format:'(%Cred%h%Creset) %Cgreen%an%Creset ¦ %s' --graph]],
-					height = 4,
+					cmd = [[git --no-pager log -6 --pretty=format:'(%Cred%h%Creset) %s']],
+					height = 6,
 				},
 			}
 
@@ -113,11 +116,9 @@ return {
 	opts = {
 		image = { enabled = true },
 		indent = { enabled = false },
-		statuscolumn = { enabled = true },
 		scope = { enabled = true },
 		bufdelete = { enabled = true },
 		dashboard = dashboard_config,
-		zen = { enabled = true },
 	},
 	init = function()
 		vim.api.nvim_create_user_command("Dash", function()
@@ -126,13 +127,6 @@ return {
 	end,
 	-- Keymaps {{{
 	keys = {
-		{
-			"<leader>zen",
-			function()
-				Snacks.zen()
-			end,
-			desc = "Zen mode",
-		},
 		{
 			"<leader>bd",
 			function()

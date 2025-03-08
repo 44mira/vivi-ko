@@ -60,7 +60,7 @@ return {
 		bind("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 		bind("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 		bind("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-		bind("gd", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+		bind("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
