@@ -38,6 +38,7 @@ return { -- Autoformat
 			html = { "prettierd", "prettier", stop_after_first = true },
 			javascriptreact = { "prettierd", "prettier", stop_after_first = true },
 			typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+			yaml = { "prettierd", "prettier", stop_after_first = true },
 			bash = { "shfmt" },
 			ocaml = { "ocamlformat" },
 		},
