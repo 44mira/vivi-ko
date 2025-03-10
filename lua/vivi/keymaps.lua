@@ -4,12 +4,6 @@ local bind = vim.keymap.set
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- reload/source current file
-bind("n", "<leader><leader>x", function()
-	vim.cmd([[luafile ~/.config/nvim/init.lua]])
-	print("Reloaded vivi.")
-end, { desc = "Source configuration" })
-
 -- ergonomic normal mode
 bind("i", "jk", "<Esc>", { desc = "Normal mode" })
 
