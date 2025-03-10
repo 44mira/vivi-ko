@@ -7,6 +7,11 @@ return {
 		tab_width = 2,
 		gobble = true,
 		shadow_color = "#100808",
+		no_window_controls = true,
+		no_round_corner = true,
+		window_title = function()
+			return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ":t")
+		end,
 	},
 	init = function()
 		local ns = require("nvim-silicon")
