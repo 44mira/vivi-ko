@@ -35,6 +35,12 @@ vim.o.laststatus = 3
 
 -- Use linebreak on words
 vim.o.linebreak = true
+vim.o.wrap = true
+
+-- Add hanging indent
+vim.o.breakindent = true
+vim.o.breakindentopt = "list:-1"
+vim.o.formatlistpat = [[^\v\s*(\*+|-+|~+|\d+\.)\s+]]
 
 -- Use marker folds
 vim.o.foldmethod = "marker"
@@ -52,7 +58,7 @@ FoldText = function()
 	return icon .. ("[[ %s ]]"):format(title())
 end
 
-vim.o.foldlevelstart = 0
+vim.o.foldlevelstart = 99
 vim.o.foldtext = "v:lua.FoldText()"
 
 -- autocommands {{{
