@@ -45,6 +45,10 @@ vim.o.formatlistpat = [[^\v\s*(\*+|-+|~+|\d+\.)\s+]]
 -- Use marker folds
 vim.o.foldmethod = "marker"
 
+-- Conceal
+vim.o.concealcursor = "nvc"
+vim.o.conceallevel = 3
+
 vim.o.rtp = vim.o.rtp
 	.. vim.fn.expand(",$HOME/.opam/default/share/ocp-index/vim")
 	.. vim.fn.expand(",$HOME/.opam/default/share/ocp-indent/vim")

@@ -152,9 +152,13 @@ return {
 
 				if vim.o.colorcolumn ~= "" then
 					vim.o.colorcolumn = ""
+					vim.o.cocu = "nvc"
+					vim.o.cole = 3
 					return
 				end
 
+				vim.o.cocu = "nvic"
+				vim.o.cole = 0
 				if vim.v.count ~= 0 then
 					vim.o.colorcolumn = vim.v.count .. ""
 				else
