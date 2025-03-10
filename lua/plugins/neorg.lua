@@ -44,6 +44,15 @@ return {
 		},
 	},
 	init = function()
+		vim.keymap.set(
+			"n",
+			"<leader>sww",
+			"<Plug>(neorg.telescope.switch_workspace)",
+			{ desc = "Switch Neorg workspace" }
+		)
+
+		vim.keymap.set("n", "<leader>swr", "<CMD>Neorg return<CR>", { desc = "Return to previous working document" })
+
 		vim.api.nvim_create_autocmd("Filetype", {
 			pattern = "norg",
 			callback = function()
@@ -58,13 +67,6 @@ return {
 					"<leader><left>",
 					"<Plug>(neorg.presenter.previous-page)",
 					{ desc = "Previous slide", buffer = true }
-				)
-
-				vim.keymap.set(
-					"n",
-					"<leader>sw",
-					"<Plug>(neorg.telescope.switch_workspace)",
-					{ desc = "Switch workspace", buffer = true }
 				)
 			end,
 		})
