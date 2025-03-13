@@ -40,6 +40,7 @@ return {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"hrsh7th/cmp-nvim-lsp",
+		"saadparwaiz1/cmp_luasnip",
 		"nvim-telescope/telescope.nvim",
 		"folke/lazydev.nvim",
 	},
@@ -68,6 +69,27 @@ return {
 		require("mason-lspconfig").setup_handlers({
 			function(server_name)
 				require("lspconfig")[server_name].setup(capabilities)
+			end,
+			["lua_ls"] = function()
+				require("lspconfig").lua_ls.setup({
+					on_init = function(client)
+						client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+							runtime = {
+								version = "LuaJIT",
+							},
+							-- Make the server aware of Neovim runtime files
+							workspace = {
+								checkThirdParty = false,
+								library = {
+									vim.env.VIMRUNTIME,
+								},
+							},
+						})
+					end,
+					settings = {
+						Lua = {},
+					},
+				})
 			end,
 		})
 	end,

@@ -1,12 +1,17 @@
 return {
+	---@type lazydev.Config
 	"folke/lazydev.nvim",
 	ft = "lua", -- only load on lua files
 	opts = {
+		runtime = vim.env.VIMRUNTIME --[[@as string]],
 		library = {
 			-- See the configuration section for more details
 			-- Load luvit types when the `vim.uv` word is found
 			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			vim.fn.expand("$HOME/.config/nvim/lua/plugins"),
+		},
+		integrations = {
+			lspconfig = true,
+			cmp = true,
 		},
 	},
 }
