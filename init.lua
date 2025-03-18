@@ -14,6 +14,7 @@ vim.o.expandtab = true
 
 -- set gitsigns column
 vim.o.signcolumn = "yes"
+vim.o.colorcolumn = "80"
 
 -- keep history
 vim.opt.undofile = true
@@ -48,8 +49,8 @@ vim.o.formatlistpat = [[^\v\s*(\*+|-+|~+|\d+\.)\s+]]
 vim.o.foldmethod = "marker"
 
 -- Conceal
-vim.o.concealcursor = "nvc"
-vim.o.conceallevel = 2
+vim.o.concealcursor = ""
+vim.o.conceallevel = 0
 
 vim.o.rtp = vim.o.rtp
 	.. vim.fn.expand(",$HOME/.opam/default/share/ocp-index/vim")

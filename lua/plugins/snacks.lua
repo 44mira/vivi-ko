@@ -115,7 +115,7 @@ return {
 	---@type snacks.Config
 	opts = {
 		image = { enabled = true },
-		indent = { enabled = false },
+		indent = { enabled = true },
 		scope = { enabled = true },
 		bufdelete = { enabled = true },
 		dashboard = dashboard_config,
@@ -150,15 +150,17 @@ return {
 					Snacks.indent.disable()
 				end
 
+				vim.cmd([[RenderMarkdown toggle]])
+
 				if vim.o.colorcolumn ~= "" then
 					vim.o.colorcolumn = ""
-					vim.o.cocu = "nvc"
-					vim.o.cole = 2
+					vim.o.cocu = ""
+					vim.o.cole = 0
 					return
 				end
 
-				vim.o.cocu = "nvic"
-				vim.o.cole = 0
+				vim.o.cocu = "nvc"
+				vim.o.cole = 2
 				if vim.v.count ~= 0 then
 					vim.o.colorcolumn = vim.v.count .. ""
 				else
