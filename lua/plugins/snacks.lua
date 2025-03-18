@@ -153,7 +153,7 @@ return {
 				if vim.o.colorcolumn ~= "" then
 					vim.o.colorcolumn = ""
 					vim.o.cocu = "nvc"
-					vim.o.cole = 3
+					vim.o.cole = 2
 					return
 				end
 

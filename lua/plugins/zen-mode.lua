@@ -11,11 +11,7 @@ return {
 			},
 		},
 	},
-	keys = {
-		{
-			"<leader>zen",
-			require("zen-mode").toggle,
-			desc = "Zen mode",
-		},
-	},
+	init = function()
+		vim.keymap.set("n", "<leader>zen", require("zen-mode").toggle, { desc = "Zen mode" })
+	end,
 }

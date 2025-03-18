@@ -49,7 +49,7 @@ vim.o.foldmethod = "marker"
 
 -- Conceal
 vim.o.concealcursor = "nvc"
-vim.o.conceallevel = 3
+vim.o.conceallevel = 2
 
 vim.o.rtp = vim.o.rtp
 	.. vim.fn.expand(",$HOME/.opam/default/share/ocp-index/vim")

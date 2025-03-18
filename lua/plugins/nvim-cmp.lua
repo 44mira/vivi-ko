@@ -61,7 +61,6 @@ return { -- Autocompletion
 				},
 				{ name = "luasnip" },
 				{ name = "path" },
-				{ name = "neorg" },
 			},
 		})
 	end,
