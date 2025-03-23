@@ -3,18 +3,18 @@ return {
 	dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
 	-- config {{{
 	config = function(_, opts)
-		local gruvbox_headers = {
-			"#3c2322", -- H1: Darkened GruvboxMaterialRed
-			"#3a2a1c", -- H2: Darkened GruvboxMaterialOrange
-			"#3a321a", -- H3: Darkened GruvboxMaterialYellow
-			"#2e331a", -- H4: Darkened GruvboxMaterialGreen
-			"#273433", -- H5: Darkened GruvboxMaterialAqua
-			"#322b36", -- H6: Darkened GruvboxMaterialPurple
-		}
-
-		for i, color in ipairs(gruvbox_headers) do
-			vim.api.nvim_set_hl(0, ("RenderMarkdownH%dBg"):format(i), { bg = color })
-		end
+		-- local gruvbox_headers = {
+		-- 	"#3c2322", -- H1: Darkened GruvboxMaterialRed
+		-- 	"#3a2a1c", -- H2: Darkened GruvboxMaterialOrange
+		-- 	"#3a321a", -- H3: Darkened GruvboxMaterialYellow
+		-- 	"#2e331a", -- H4: Darkened GruvboxMaterialGreen
+		-- 	"#273433", -- H5: Darkened GruvboxMaterialAqua
+		-- 	"#322b36", -- H6: Darkened GruvboxMaterialPurple
+		-- }
+		--
+		-- for i, color in ipairs(gruvbox_headers) do
+		-- 	vim.api.nvim_set_hl(0, ("RenderMarkdownH%dBg"):format(i), { bg = color })
+		-- end
 
 		require("render-markdown").setup(opts)
 	end,

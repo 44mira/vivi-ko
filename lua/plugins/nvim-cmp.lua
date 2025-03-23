@@ -1,3 +1,16 @@
+local sources = { "nvim_lsp", "render-markdown", "luasnip", "orgmode", "path" }
+
+local sources_gen = function()
+	local res = {}
+	for i, source in ipairs(sources) do
+		res[i] = { name = source }
+	end
+
+	res[#res + 1] = { name = "lazydev", group_index = 0 }
+
+	return res
+end
+
 return { -- Autocompletion
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
@@ -52,17 +65,7 @@ return { -- Autocompletion
 					end
 				end, { "i", "s" }),
 			}),
-			sources = {
-				{ name = "nvim_lsp" },
-				{
-					name = "lazydev",
-					-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-					group_index = 0,
-				},
-				{ name = "render-markdown" },
-				{ name = "luasnip" },
-				{ name = "path" },
-			},
+			sources = sources_gen(),
 		})
 	end,
 }

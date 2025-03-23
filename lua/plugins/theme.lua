@@ -8,23 +8,26 @@ return {
 	-- everything else.
 	lazy = false,
 	priority = 1000,
+	dependencies = "rktjmp/lush.nvim",
 
 	-- you can replace the code below with your theme of choice
-	"sainnhe/gruvbox-material",
+	"zenbones-theme/zenbones.nvim",
 
 	-- this attribute allows us to specify extra things to run after loading
 	-- and setting up our theme.
 	init = function()
 		-- these options are defined in gruvbox-material documentation.
-		vim.g.gruvbox_material_enable_italic = true
-		vim.g.gruvbox_material_enable_bold = true
+		-- vim.g.gruvbox_material_enable_italic = true
+		-- vim.g.gruvbox_material_enable_bold = true
 
 		-- this is the line that sets the vim theme to gruvbox-material
-		vim.cmd.colorscheme("gruvbox-material")
+		-- vim.cmd.colorscheme("gruvbox-material")
+		vim.cmd.colorscheme("forestbones")
 
+		vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#272e33" })
 		-- these are extra overriding highlights
 		-- I've set the line numbers to be brighter.
-		vim.api.nvim_set_hl(0, "LineNr", { fg = "#958877" })
-		vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#CD605A" })
+		-- vim.api.nvim_set_hl(0, "LineNr", { fg = "#958877" })
+		-- vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#CD605A" })
 	end,
 }

@@ -70,6 +70,9 @@ return {
 			function(server_name)
 				require("lspconfig")[server_name].setup(capabilities)
 			end,
+			["clangd"] = function()
+				require("lspconfig").clangd.setup({})
+			end,
 			["lua_ls"] = function()
 				require("lspconfig").lua_ls.setup({
 					on_init = function(client)

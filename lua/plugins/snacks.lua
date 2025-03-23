@@ -8,6 +8,12 @@ local dashboard_config = {
 	preset = {
 		keys = {
 			{
+				icon = "󰏢",
+				key = "o",
+				desc = "Orgmode Notes",
+				action = ":cd ~/orgfiles | e .",
+			},
+			{
 				icon = " ",
 				key = "n",
 				desc = "Configure Neovim",
@@ -153,14 +159,14 @@ return {
 				vim.cmd([[RenderMarkdown toggle]])
 
 				if vim.o.colorcolumn ~= "" then
+					vim.o.cocu = "nvc"
+					vim.o.cole = 2
 					vim.o.colorcolumn = ""
-					vim.o.cocu = ""
-					vim.o.cole = 0
 					return
 				end
 
-				vim.o.cocu = "nvc"
-				vim.o.cole = 2
+				vim.o.cocu = ""
+				vim.o.cole = 0
 				if vim.v.count ~= 0 then
 					vim.o.colorcolumn = vim.v.count .. ""
 				else

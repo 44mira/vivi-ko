@@ -127,6 +127,9 @@ return {
 			},
 		},
 		-- }}}
+		-- Metadata {{{
+		disable_frontmatter = true,
+		-- }}}
 		-- Link follows {{{
 		-- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
 		-- URL it will be ignored but you can customize this behavior here.

@@ -9,6 +9,7 @@ return {
 		vim.keymap.set("n", "<F12>", dap.step_out, { desc = "DAP: Step Out" })
 		vim.keymap.set("n", "<leader>bp", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
 
+		-- Lua {{{
 		dap.adapters["local-lua"] = {
 			type = "executable",
 			command = "node",
@@ -41,5 +42,6 @@ return {
 				args = {},
 			},
 		}
+		-- }}}
 	end,
 }
