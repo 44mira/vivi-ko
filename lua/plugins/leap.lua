@@ -5,6 +5,6 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, lhs, rhs, { desc = desc })
 		end
 
-		bind("<leader>l", "<Plug>(leap)")
+		bind("<leader><leader>", "<Plug>(leap)")
 	end,
 }

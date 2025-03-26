@@ -11,7 +11,7 @@ return {
 	dependencies = "rktjmp/lush.nvim",
 
 	-- you can replace the code below with your theme of choice
-	"zenbones-theme/zenbones.nvim",
+	"franbach/miramare",
 
 	-- this attribute allows us to specify extra things to run after loading
 	-- and setting up our theme.
@@ -22,12 +22,12 @@ return {
 
 		-- this is the line that sets the vim theme to gruvbox-material
 		-- vim.cmd.colorscheme("gruvbox-material")
-		vim.cmd.colorscheme("forestbones")
+		vim.cmd.colorscheme("miramare")
 
-		vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#272e33" })
+		-- vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#272e33" })
 		-- these are extra overriding highlights
 		-- I've set the line numbers to be brighter.
-		-- vim.api.nvim_set_hl(0, "LineNr", { fg = "#958877" })
-		-- vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#CD605A" })
+		vim.api.nvim_set_hl(0, "LineNr", { fg = "#958877" })
+		vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#CD605A" })
 	end,
 }

@@ -2,6 +2,30 @@ return {
 	"nvim-orgmode/orgmode",
 	dependencies = {
 		{
+			"akinsho/org-bullets.nvim",
+			config = function()
+				local heading_icons = { "║", "│", "╎", "┆", "┊", "⊜", "⊖", "⊘" }
+				local headings = {}
+
+				for i = 0, 7 do
+					headings[i] = { heading_icons[i % #heading_icons + 1], ("@org.headline.level%d"):format(i) }
+				end
+
+				require("org-bullets").setup({
+					concealcursor = true,
+					symbols = {
+						list = "•",
+						headlines = headings,
+						checkboxes = {
+							half = { "", "@org.checkbox.halfchecked" },
+							done = { "✓", "@org.keyword.done" },
+							todo = { "˟", "@org.keyword.todo" },
+						},
+					},
+				})
+			end,
+		},
+		{
 			"michaelb/sniprun",
 			branch = "master",
 			build = "sh install.sh",
@@ -32,7 +56,7 @@ return {
 				})
 
 				vim.keymap.set("n", "<leader>obr", sniprun.run, { desc = "Run code snippet " })
-				vim.keymap.set("n", "<leader>obc", sniprun.display.close_all, { desc = "Run code snippet " })
+				vim.keymap.set("n", "<leader>obc", sniprun.display.close_all, { desc = "Close code snippet " })
 			end,
 		})
 	end,

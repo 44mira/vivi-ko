@@ -118,9 +118,19 @@ return {
 	"folke/snacks.nvim",
 	priority = 1000,
 	lazy = false,
+
+	---@module 'snacks'
 	---@type snacks.Config
 	opts = {
-		image = { enabled = true },
+		image = {
+			enabled = true,
+			math = {
+				enabled = false,
+				latex = {
+					font_size = "normalsize",
+				},
+			},
+		},
 		indent = { enabled = true },
 		scope = { enabled = true },
 		bufdelete = { enabled = true },

@@ -3,6 +3,8 @@ return {
 	opts = {
 		plugins = {
 			options = {
+				number = false,
+				relativenumber = false,
 				laststatus = 0,
 			},
 			kitty = {

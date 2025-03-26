@@ -14,11 +14,14 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		local configs = require("nvim-treesitter.configs")
-
 		configs.setup({
 			ensure_installed = { "lua", "python", "markdown", "vim", "vimdoc", "javascript", "html" },
 			sync_install = false,
-			highlight = { enable = true },
+			highlight = {
+				enable = true,
+				disable = { "latex" },
+				additional_vim_regex_highlighting = { "latex", "markdown" },
+			},
 			indent = { enable = true },
 		})
 	end,

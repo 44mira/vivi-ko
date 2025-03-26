@@ -39,8 +39,9 @@ return {
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
-		"hrsh7th/cmp-nvim-lsp",
-		"saadparwaiz1/cmp_luasnip",
+		-- "hrsh7th/cmp-nvim-lsp",
+		-- "saadparwaiz1/cmp_luasnip",
+		"saghen/blink.cmp",
 		"nvim-telescope/telescope.nvim",
 		"folke/lazydev.nvim",
 	},
@@ -53,7 +54,7 @@ return {
 			automatic_installation = false,
 		})
 
-		vim.keymap.set("i", "<C-j>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+		-- vim.keymap.set("i", "<C-j>", vim.lsp.buf.signature_help, { desc = "Signature help" })
 		bind("gd", builtin.lsp_definitions, "[G]oto [D]efinition")
 		bind("gr", builtin.lsp_references, "[G]oto [R]eferences")
 		bind("gI", builtin.lsp_implementations, "[G]oto [I]mplementation")
@@ -63,36 +64,14 @@ return {
 		bind("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 		bind("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+		-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+		-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 		require("mason-lspconfig").setup_handlers({
 			function(server_name)
-				require("lspconfig")[server_name].setup(capabilities)
-			end,
-			["clangd"] = function()
-				require("lspconfig").clangd.setup({})
-			end,
-			["lua_ls"] = function()
-				require("lspconfig").lua_ls.setup({
-					on_init = function(client)
-						client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-							runtime = {
-								version = "LuaJIT",
-							},
-							-- Make the server aware of Neovim runtime files
-							workspace = {
-								checkThirdParty = false,
-								library = {
-									vim.env.VIMRUNTIME,
-								},
-							},
-						})
-					end,
-					settings = {
-						Lua = {},
-					},
-				})
+				local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+				require("lspconfig")[server_name].setup({ capabilities = capabilities })
 			end,
 		})
 	end,

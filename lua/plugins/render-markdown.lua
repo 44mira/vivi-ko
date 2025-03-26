@@ -12,9 +12,9 @@ return {
 		-- 	"#322b36", -- H6: Darkened GruvboxMaterialPurple
 		-- }
 		--
-		-- for i, color in ipairs(gruvbox_headers) do
-		-- 	vim.api.nvim_set_hl(0, ("RenderMarkdownH%dBg"):format(i), { bg = color })
-		-- end
+		for i = 1, 6 do
+			vim.api.nvim_set_hl(0, ("RenderMarkdownH%dBg"):format(i), { bg = "#242021" })
+		end
 
 		require("render-markdown").setup(opts)
 	end,

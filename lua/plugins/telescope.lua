@@ -13,7 +13,7 @@ return {
 
 		bind("<leader>sf", builtin.find_files, "Search files")
 		bind("<leader>sg", builtin.live_grep, "Grep files")
-		bind("<leader><leader>", builtin.buffers, "Search buffers")
+		bind("<leader>sb", builtin.buffers, "Search buffers")
 		bind("<leader>sd", builtin.diagnostics, "Search Document diagnostics")
 		bind("<leader>s/", builtin.current_buffer_fuzzy_find, "Search in file")
 	end,
