@@ -23,3 +23,27 @@ end
 -- buffer navigation
 bind("n", "<leader>[", "<cmd>bp<cr>", { desc = "Previous buffer" })
 bind("n", "<leader>]", "<cmd>bn<cr>", { desc = "Next buffer" })
+
+-- moveline {{{
+---@param direction integer The direction of the move
+---@return fun() : nil # The callback for moving
+local function moveline(direction)
+	return function()
+		local cursor, c = vim.fn.line("."), vim.fn.line("$")
+
+		local new_address = cursor + direction * vim.v.count1
+
+		-- edge check
+		if new_address < 0 or new_address > c then
+			return
+		end
+
+		local out = "move " .. new_address
+
+		vim.cmd(out)
+	end
+end
+-- }}}
+--
+bind("n", "<M-Down>", moveline(1), { desc = "Move line down" })
+bind("n", "<M-Up>", moveline(-2), { desc = "Move line up" })
