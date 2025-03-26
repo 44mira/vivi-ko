@@ -28,10 +28,13 @@ return {
 		keymap = {
 			preset = "default",
 
-			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-			["<C-e>"] = { "hide" },
+			-- <C-CR> for accept
 			["<C-y>"] = {},
 			["<C-CR>"] = { "select_and_accept" },
+
+			-- here for reference, doesn't change anything in default preset
+			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+			["<C-e>"] = { "hide" },
 
 			["<Up>"] = { "select_prev", "fallback" },
 			["<Down>"] = { "select_next", "fallback" },
@@ -61,24 +64,43 @@ return {
 			},
 		},
 
-		snippets = {
-			preset = "luasnip",
-		},
-
 		-- Default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
 			per_filetype = {
 				org = { "orgmode" },
 			},
+
+			default = { "lsp", "path", "snippets", "buffer", "lazydev" },
 			providers = {
 				orgmode = {
 					name = "Orgmode",
 					module = "orgmode.org.autocompletion.blink",
 					fallbacks = { "buffer" },
 				},
+				lazydev = {
+					name = "LazyDev",
+					module = "lazydev.integrations.blink",
+					-- make lazydev completions top priority (see `:h blink.cmp`)
+					score_offset = 100,
+				},
 			},
-			default = { "lsp", "path", "snippets", "buffer" },
+		},
+
+		-- Use luasnip for managing snippets
+		snippets = {
+			preset = "luasnip",
+		},
+
+		cmdline = {
+			keymap = {
+				preset = "inherit",
+			},
+			completion = {
+				menu = {
+					auto_show = true,
+				},
+			},
 		},
 
 		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
