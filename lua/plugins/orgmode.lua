@@ -3,27 +3,18 @@ return {
 	dependencies = {
 		{
 			"akinsho/org-bullets.nvim",
-			config = function()
-				local heading_icons = { "║", "│", "╎", "┆", "┊", "⊜", "⊖", "⊘" }
-				local headings = {}
-
-				for i = 0, 7 do
-					headings[i] = { heading_icons[i % #heading_icons + 1], ("@org.headline.level%d"):format(i) }
-				end
-
-				require("org-bullets").setup({
-					concealcursor = true,
-					symbols = {
-						list = "•",
-						headlines = headings,
-						checkboxes = {
-							half = { "", "@org.checkbox.halfchecked" },
-							done = { "✓", "@org.keyword.done" },
-							todo = { "˟", "@org.keyword.todo" },
-						},
+			opts = {
+				concealcursor = true,
+				symbols = {
+					list = "•",
+					headlines = { "║", "│", "╎", "┆", "┊", "⊜", "⊖", "⊘" },
+					checkboxes = {
+						half = { "", "@org.checkbox.halfchecked" },
+						done = { "", "@org.keyword.done" },
+						todo = { "", "@org.keyword.todo" },
 					},
-				})
-			end,
+				},
+			},
 		},
 		{
 			"michaelb/sniprun",
@@ -49,12 +40,6 @@ return {
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = "org",
 			callback = function()
-				-- use return to for context-aware new
-				vim.keymap.set("i", "<C-CR>", '<cmd>lua require("orgmode").action("org_mappings.meta_return")<CR>', {
-					silent = true,
-					buffer = true,
-				})
-
 				vim.keymap.set("n", "<leader>obr", sniprun.run, { desc = "Run code snippet " })
 				vim.keymap.set("n", "<leader>obc", sniprun.display.close_all, { desc = "Close code snippet " })
 			end,
@@ -78,6 +63,12 @@ return {
 		org_capture_templates = {
 			t = { description = "Task", template = "* TODO %?\n %u" },
 			s = { description = "Scratch", template = "* %U\n%?" },
+		},
+
+		mappings = {
+			org = {
+				org_toggle_checkbox = { "<Leader>oxt", desc = "org toggle checkbox" },
+			},
 		},
 	},
 }

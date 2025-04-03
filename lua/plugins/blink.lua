@@ -1,7 +1,14 @@
+local default_sources = { "lsp", "path", "snippets", "buffer" }
+
 return {
 	"saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
-	dependencies = { "rafamadriz/friendly-snippets", { "L3MON4D3/LuaSnip", version = "v2.*" } },
+	dependencies = {
+		"saghen/blink.compat",
+		"rafamadriz/friendly-snippets",
+		{ "L3MON4D3/LuaSnip", version = "v2.*" },
+		"nvim-orgmode/orgmode",
+	},
 
 	-- use a release tag to download pre-built binaries
 	version = "1.*",
@@ -68,14 +75,15 @@ return {
 		-- elsewhere in your config, without redefining it, due to `opts_extend`
 		sources = {
 			per_filetype = {
-				org = { "orgmode" },
+				lua = vim.tbl_extend("keep", default_sources, { "lazydev" }),
+				org = vim.tbl_extend("keep", default_sources, { "orgmode" }),
 			},
 
-			default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+			default = default_sources,
 			providers = {
 				orgmode = {
-					name = "Orgmode",
-					module = "orgmode.org.autocompletion.blink",
+					name = "orgmode",
+					module = "blink.compat.source",
 					fallbacks = { "buffer" },
 				},
 				lazydev = {
