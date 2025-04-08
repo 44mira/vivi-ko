@@ -81,19 +81,23 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- create augroup for fold states
 vim.api.nvim_create_augroup("vivi-fold-state", { clear = true })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
+vim.o.viewoptions = "folds"
+
+vim.api.nvim_create_autocmd("BufWinLeave", {
 	desc = "Save fold state when saving",
 	group = "vivi-fold-state",
+	pattern = { "?*" },
 	callback = function()
-		vim.cmd("mkview!")
+		vim.cmd("mkview")
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufWritePost", {
+vim.api.nvim_create_autocmd("BufWinEnter", {
 	desc = "Load fold state when reading",
 	group = "vivi-fold-state",
+	pattern = { "?*" },
 	callback = function()
-		vim.cmd("loadview")
+		vim.cmd("silent! loadview")
 	end,
 })
 

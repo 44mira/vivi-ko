@@ -50,12 +50,19 @@ local dashboard_config = {
 		function()
 			local in_git = Snacks.git.get_root() ~= nil
 			local has_remote = vim.system({ "git", "remote" }, { text = true }):wait().stdout ~= ""
-
+			-- templates {{{3
+			local issue_template =
+				[['{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") .title .headRefName (timeago .updatedAt)}}{{else}} No Issues found. {{end}}']]
+			local prs_template =
+				[['{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") .title .headRefName (timeago .updatedAt)}}{{else}} No PRs found. {{end}}']]
+			-- }}}3
 			local cmds = {
 				{
 					title = "Open Issues",
 					enabled = has_remote,
-					cmd = [[gh issue list --json number,title,updatedAt --template '{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") .title .headRefName (timeago .updatedAt)}}{{else}} No Issues found. {{end}}']],
+					cmd = "gh issue list --json number,title,updatedAt --template "
+						.. issue_template
+						.. " 2>/dev/null || echo 'Error fetching issues. See `gh issue list`.'",
 					key = "i",
 					action = function()
 						vim.fn.jobstart("gh issue list --web", { detach = true })
@@ -67,7 +74,9 @@ local dashboard_config = {
 					icon = " ",
 					enabled = has_remote,
 					title = "Open PRs",
-					cmd = [[gh pr list --json number,title,headRefName,updatedAt --template '{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") .title .headRefName (timeago .updatedAt)}}{{else}} No PRs found. {{end}}']],
+					cmd = "gh pr list --json number,title,headRefName,updatedAt --template "
+						.. prs_template
+						.. " 2>/dev/null || echo 'Error fetching PRs. See `gh pr list`.'",
 					key = "P",
 					action = function()
 						vim.fn.jobstart("gh pr list --web", { detach = true })
@@ -113,7 +122,7 @@ local dashboard_config = {
 	},
 }
 -- }}}
-
+-- main config {{{
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -140,7 +149,7 @@ return {
 		vim.api.nvim_create_user_command("Dash", function()
 			Snacks.dashboard.open()
 		end, {})
-	end,
+	end, -- }}}
 	-- Keymaps {{{
 	keys = {
 		{

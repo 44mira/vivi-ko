@@ -39,8 +39,7 @@ return {
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
-		-- "hrsh7th/cmp-nvim-lsp",
-		-- "saadparwaiz1/cmp_luasnip",
+		"jay-babu/mason-nvim-dap.nvim",
 		"saghen/blink.cmp",
 		"nvim-telescope/telescope.nvim",
 		"folke/lazydev.nvim",
@@ -49,6 +48,25 @@ return {
 		local builtin = require("telescope.builtin")
 
 		require("mason").setup({})
+		require("mason-nvim-dap").setup({
+			ensure_installed = {
+				"delve",
+				"python",
+				"codelldb",
+				"php",
+				"bash",
+				"elixir",
+				"haskell",
+				"node2",
+			},
+			automatic_installation = true,
+			handlers = {
+				function(config)
+					-- all sources with no handler get passed here
+					require("mason-nvim-dap").default_setup(config)
+				end,
+			},
+		})
 		require("mason-lspconfig").setup({
 			ensure_installed = { "lua_ls", "pyright" },
 			automatic_installation = false,

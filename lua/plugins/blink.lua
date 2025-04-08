@@ -7,7 +7,6 @@ return {
 		"saghen/blink.compat",
 		"rafamadriz/friendly-snippets",
 		{ "L3MON4D3/LuaSnip", version = "v2.*" },
-		"nvim-orgmode/orgmode",
 	},
 
 	-- use a release tag to download pre-built binaries
@@ -65,6 +64,9 @@ return {
 
 		-- (Default) Only show the documentation popup when manually triggered
 		completion = {
+			menu = {
+				auto_show = true,
+			},
 			documentation = {
 				auto_show = true,
 				auto_show_delay_ms = 500,
@@ -76,16 +78,10 @@ return {
 		sources = {
 			per_filetype = {
 				lua = vim.tbl_extend("keep", default_sources, { "lazydev" }),
-				org = vim.tbl_extend("keep", default_sources, { "orgmode" }),
 			},
 
 			default = default_sources,
 			providers = {
-				orgmode = {
-					name = "orgmode",
-					module = "blink.compat.source",
-					fallbacks = { "buffer" },
-				},
 				lazydev = {
 					name = "LazyDev",
 					module = "lazydev.integrations.blink",
